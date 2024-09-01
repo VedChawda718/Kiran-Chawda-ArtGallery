@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Navbar from "./components/Navbar";
+import LandingPage from "./components/LandingPage";
+import About from "./components/About";
+import Marquee from "./components/Marquee";
 
 function App() {
+  const [isNavbarActive, setIsNavbarActive] = useState(false);
+
+  const toggleNavbar = () => {
+    setIsNavbarActive(!isNavbarActive);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App bg-zinc-950 h-screen w-full">
+      <Navbar toggleNavbar={toggleNavbar} isNavbarActive={isNavbarActive} />
+      {isNavbarActive ? null : (
+        <>
+          <LandingPage />
+          <Marquee />
+          <About />
+        </>
+      )}
     </div>
   );
 }
